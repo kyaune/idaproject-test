@@ -20,5 +20,6 @@ export default {
  .main {
    display: flex;
    flex-direction: row;
+   font-family: Sourse Sans Pro;
  }
 </style>
