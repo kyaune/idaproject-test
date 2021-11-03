@@ -15,7 +15,8 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
+@import "assets/variables";
  .main {
    display: flex;
    flex-direction: row;
