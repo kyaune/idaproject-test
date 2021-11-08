@@ -6,12 +6,12 @@
   >
     <DeleteIcon v-show="hover" class="icon-container"/>
     <div class="product__card">
-  <img src="~/assets/Rectangle31.jpg" alt="product image" class="product__image">
-    <div class="product__container">
-      <p class="product__name">Наименование товара</p>
-      <p class="product__description">Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк</p>
-      <p class="product__price">10 000 руб.</p>
-    </div>
+      <img src="~/assets/Rectangle31.jpg" alt="product image" class="product__image">
+      <div class="product__container">
+        <p class="product__name">Наименование товара</p>
+        <p class="product__description">Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк</p>
+        <p class="product__price">10 000 руб.</p>
+      </div>
   </div>
   </div>
 </template>
@@ -20,6 +20,9 @@ import DeleteIcon from '@/components/ui/delete_icon'
 export default {
   components: {
     DeleteIcon
+  },
+  props: {
+    product: Object
   },
   data() {
     return {
@@ -30,6 +33,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "assets/variables.scss";
+p {
+  margin: 0;
+}
 .product {
   cursor: pointer;
   position: relative;
@@ -61,6 +67,7 @@ export default {
 }
 .product__description {
   font-size: $fontM;
+  padding: 16px 0 32px 0;
 }
 .product__price {
   font-size: $fontXL;

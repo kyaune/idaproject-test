@@ -6,23 +6,23 @@
 <!--         TODO: move inputs into different components-->
         <div class="container__element">
           <p class="container__description">Наименование товара</p>
-          <input type="text" name="name" placeholder="Введите наименование товара" class="container__input">
+          <input type="text" v-model="name" name="name" placeholder="Введите наименование товара" class="container__input" required>
         </div>
         <div class="container__element">
           <p class="container__description">Описание товара</p>
 <!--         TODO: textarea placeholder doesnt match input placeholder-->
-          <textarea name="description" placeholder="Введите описание товара" class="container__input" id="good-description"></textarea>
+          <textarea name="description" v-model="description" placeholder="Введите описание товара" class="container__input" id="good-description"></textarea>
         </div>
         <div class="container__element">
           <p class="container__description">Ссылка на изображение товара</p>
-          <input type="text" name="image" placeholder="Введите ссылку" class="container__input">
+          <input type="text" name="image" v-model="image" placeholder="Введите ссылку" class="container__input" required>
         </div>
         <div class="container__element">
           <p class="container__description">Цена товара</p>
-          <input type="text" name="price" placeholder="Введите цену" class="container__input">
+          <input type="text" name="price" v-model.number="price" placeholder="Введите цену" class="container__input" required>
         </div>
       </form>
-      <Button></Button>
+      <Button :active="active"></Button>
     </div>
   </div>
 </template>
@@ -32,12 +32,24 @@ import Button from '@/components/ui/button'
 export default {
   components: {
     Button
+  },
+  data() {
+    return {
+      active: true,
+      name: '',
+      price: '',
+      description: '',
+      image: ''
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
 @import "assets/variables";
+p {
+  margin: 0;
+}
 .sidemenu {
   min-width: 332px;
   background-color: $white_1;
@@ -75,6 +87,9 @@ export default {
   width: 100%;
   font-size: $fontS;
   padding: 0 0 0 16px;
+}
+.error {
+  border: 1px solid $red;
 }
 #good-description {
   height: 108px;
