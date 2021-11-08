@@ -1,8 +1,17 @@
 <template>
-  <div class="main">
+  <div class="main" @click="handleDelete">
     <img src="~/assets/delete1.png" alt="delete-icon" class="icon">
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    handleDelete() {
+      this.$emit('handleDelete')
+    }
+  }
+}
+</script>
 <style lang="scss" scoped>
 @import "assets/variables.scss";
 .main {
