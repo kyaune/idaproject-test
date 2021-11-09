@@ -32,12 +32,14 @@
 
 <script>
 import Button from '@/components/ui/button'
+import data from '@/static/data.js'
 export default {
   components: {
     Button
   },
   data() {
     return {
+      products: [],
       active: false,
       isClicked: false,
       name: null,
@@ -52,11 +54,24 @@ export default {
       if(this.name && this.price && this.image) {
         this.active = false;
         this.isClicked = false;
+        this.addProduct();
         return true;
       }
-      console.log(this.isClicked)
       e.preventDefault();
+    },
+    getNewId() {
+      const products = JSON.parse(localStorage.getItem('products'))
+      const lastIndex = products[products.length - 1].id
+      return lastIndex + 1;
+    },
+    addProduct() {
+      const newProduct = {name: this.name, description: this.description, price: this.price, id: this.getNewId(), image: this.image}
+      this.products.push(newProduct)
+      localStorage.setItem('products', JSON.stringify(this.products))
     }
+  },
+  mounted() {
+    this.products = JSON.parse(localStorage.getItem('products'))
   }
 }
 </script>

@@ -7,20 +7,23 @@
 </template>
 <script>
 import ProductCard from '@/components/product_card'
-import data from '@/static/data.js'
 export default {
   components: {
     ProductCard
   },
   data () {
     return {
-      products: data
+      products: []
     }
   },
   methods: {
     handleDelete(value) {
       this.products = this.products.filter(el => el.id !== value)
+      localStorage.setItem('products', JSON.stringify(this.products))
     }
+  },
+  mounted() {
+    this.products = JSON.parse(localStorage.getItem('products'))
   }
 }
 </script>
