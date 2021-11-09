@@ -21,7 +21,7 @@
         </div>
         <div class="container__element">
           <p class="container__description">Цена товара</p>
-          <input type="text" name="price" v-model.number="price" placeholder="Введите цену" class="container__input" :class="{ 'error': isClicked && !price}">
+          <input type="text" name="price" @blur="thousandsSeparator" v-model.number="price" placeholder="Введите цену" class="container__input" :class="{ 'error': isClicked && !price}">
           <p class="container__error" v-if="isClicked && !price">Поле является обязательным</p>
         </div>
         <input class="button" type="submit" :class="{'active' : name && price && image}" value="Добавление товара">
@@ -32,7 +32,6 @@
 
 <script>
 import Button from '@/components/ui/button'
-import data from '@/static/data.js'
 export default {
   components: {
     Button
@@ -68,6 +67,13 @@ export default {
       const newProduct = {name: this.name, description: this.description, price: this.price, id: this.getNewId(), image: this.image}
       this.products.push(newProduct)
       localStorage.setItem('products', JSON.stringify(this.products))
+    },
+    thousandsSeparator() {
+      if (this.price !== '' || this.price !== undefined || this.price !== 0 || this.price !== '0' || this.price !== null) {
+        this.price = this.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      } else {
+        return this.price;
+      }
     }
   },
   mounted() {
