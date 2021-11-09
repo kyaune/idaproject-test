@@ -8,10 +8,16 @@
 <script>
 import Sidemenu from '@/components/sidemenu'
 import ProductsList from '@/components/products_list'
+import data from '@/static/data'
 export default {
   components: {
     Sidemenu,
     ProductsList
+  },
+  created() {
+    if(!localStorage.getItem('products')) {
+      localStorage.setItem('products', JSON.stringify(data))
+    }
   }
 }
 </script>
