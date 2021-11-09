@@ -2,11 +2,12 @@
   <div class="sidemenu">
     <p class="header">Добавление товара</p>
     <div class="container">
-      <form class="container__form">
+      <form class="container__form" @submit="checkForm">
 <!--         TODO: move inputs into different components-->
         <div class="container__element">
           <p class="container__description">Наименование товара</p>
-          <input type="text" v-model="name" name="name" placeholder="Введите наименование товара" class="container__input" required>
+          <input type="text" v-model="name" name="name" placeholder="Введите наименование товара" class="container__input" :class="{ 'error': isClicked && !name}">
+          <p class="container__error" v-if="isClicked && !name">Поле является обязательным</p>
         </div>
         <div class="container__element">
           <p class="container__description">Описание товара</p>
@@ -15,14 +16,16 @@
         </div>
         <div class="container__element">
           <p class="container__description">Ссылка на изображение товара</p>
-          <input type="text" name="image" v-model="image" placeholder="Введите ссылку" class="container__input" required>
+          <input type="text" name="image" v-model="image" placeholder="Введите ссылку" class="container__input" :class="{ 'error': isClicked && !image}" >
+          <p class="container__error" v-if="isClicked && !image">Поле является обязательным</p>
         </div>
         <div class="container__element">
           <p class="container__description">Цена товара</p>
-          <input type="text" name="price" v-model.number="price" placeholder="Введите цену" class="container__input" required>
+          <input type="text" name="price" v-model.number="price" placeholder="Введите цену" class="container__input" :class="{ 'error': isClicked && !price}">
+          <p class="container__error" v-if="isClicked && !price">Поле является обязательным</p>
         </div>
+        <input class="button" type="submit" :class="{'active' : name && price && image}" value="Добавление товара">
       </form>
-      <Button :active="active"></Button>
     </div>
   </div>
 </template>
@@ -35,11 +38,24 @@ export default {
   },
   data() {
     return {
-      active: true,
-      name: '',
-      price: '',
-      description: '',
-      image: ''
+      active: false,
+      isClicked: false,
+      name: null,
+      price: null,
+      description: null,
+      image: null
+    }
+  },
+  methods: {
+    checkForm(e) {
+      this.isClicked = true;
+      if(this.name && this.price && this.image) {
+        this.active = false;
+        this.isClicked = false;
+        return true;
+      }
+      console.log(this.isClicked)
+      e.preventDefault();
     }
   }
 }
@@ -88,8 +104,29 @@ p {
   font-size: $fontS;
   padding: 0 0 0 16px;
 }
+.container__error {
+  padding-top: 4px;
+  color: $red;
+  font-size: $fontXXS;
+}
 .error {
   border: 1px solid $red;
+}
+.button {
+  width: 284px;
+  font-size: $fontS;
+  font-weight: 600;
+  height: 36px;
+  border: none;
+  border-radius: $border_radiusM;
+  background-color: $gray_1;
+  color: $gray_2;
+  margin-top: 16px;
+  margin-left: 8px;
+}
+.active {
+  background-color: $green;
+  color: white;
 }
 #good-description {
   height: 108px;

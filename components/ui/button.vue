@@ -5,9 +5,6 @@
 export default {
   props: {
     active: Boolean
-  },
-  mounted() {
-    console.log(this.active)
   }
 }
 </script>

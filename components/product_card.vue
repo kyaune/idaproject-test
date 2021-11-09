@@ -4,13 +4,13 @@
   @mouseout="hover = false"
   class="product"
   >
-    <DeleteIcon v-show="hover" class="icon-container"/>
+    <DeleteIcon v-show="hover" class="icon-container" @handleDelete="handleDelete"/>
     <div class="product__card">
-      <img src="~/assets/Rectangle31.jpg" alt="product image" class="product__image">
+      <img :src="product.image" alt="product image" class="product__image">
       <div class="product__container">
-        <p class="product__name">Наименование товара</p>
-        <p class="product__description">Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк</p>
-        <p class="product__price">10 000 руб.</p>
+        <p class="product__name">{{product.name}}</p>
+        <p class="product__description">{{product.description}}</p>
+        <p class="product__price">{{product.price}} руб.</p>
       </div>
   </div>
   </div>
@@ -27,6 +27,11 @@ export default {
   data() {
     return {
       hover: false
+    }
+  },
+  methods: {
+    handleDelete() {
+      this.$emit('delete', this.product.id)
     }
   }
 }
@@ -55,8 +60,8 @@ p {
   max-height: 32px;
 }
 .product__image {
-  max-width: 332px;
-  max-height: 200px;
+  width: 332px;
+  height: 200px;
 }
 .product__container {
   padding: 16px 16px 24px 16px;
