@@ -23,7 +23,7 @@
           <input type="text" name="price" @blur="thousandsSeparator" v-model.number="price" placeholder="Введите цену" class="container__input" :class="{ 'error': isClicked && !price}">
           <p class="container__error" v-if="isClicked && !price">Поле является обязательным</p>
         </div>
-        <input class="button" type="submit" :class="{'active' : name && price && image}" value="Добавление товара">
+        <input class="button" type="submit" :class="{'active' : name && price && image}" value="Добавить товара">
       </form>
     </div>
   </div>
@@ -115,6 +115,7 @@ p {
   margin: 0 0 4px 0;
 }
 .container__input {
+  font-family: 'Source Sans Pro', sans-serif;
   border: none;
   border-radius: $border_radiusS;
   box-shadow: $box-shadow;
@@ -154,6 +155,9 @@ p {
 }
 textarea {
   background-color: $white_1;
+}
+textarea::placeholder {
+  color: $gray_2;
 }
 input::placeholder {
   color: $gray_2;
