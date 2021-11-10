@@ -3,7 +3,6 @@
     <p class="header">Добавление товара</p>
     <div class="container">
       <form class="container__form" @submit="checkForm">
-<!--         TODO: move inputs into different components-->
         <div class="container__element">
           <p class="container__description required">Наименование товара</p>
           <input type="text" v-model="name" name="name" placeholder="Введите наименование товара" class="container__input" :class="{ 'error': isClicked && !name}">
@@ -12,7 +11,7 @@
         <div class="container__element">
           <p class="container__description">Описание товара</p>
 <!--         TODO: textarea placeholder doesnt match input placeholder-->
-          <textarea name="description" v-model="description" placeholder="Введите описание товара" class="container__input" id="good-description"></textarea>
+          <textarea v-model="description" placeholder="Введите описание товара" class="container__input" id="good-description"></textarea>
         </div>
         <div class="container__element">
           <p class="container__description required">Ссылка на изображение товара</p>
@@ -31,11 +30,7 @@
 </template>
 
 <script>
-import Button from '@/components/ui/button'
 export default {
-  components: {
-    Button
-  },
   data() {
     return {
       active: false,
@@ -52,7 +47,7 @@ export default {
     }
   },
   methods: {
-    checkForm(e) {
+    checkForm() {
       this.isClicked = true;
       if(this.name && this.price && this.image) {
         this.active = false;
@@ -60,7 +55,6 @@ export default {
         this.addProduct();
         return true;
       }
-      e.preventDefault();
     },
     getNewId() {
       const products = JSON.parse(localStorage.getItem('products'))
