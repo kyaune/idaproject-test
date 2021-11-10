@@ -6,9 +6,9 @@
       <option value="price max">По цене max</option>
       <option value="name">По наименованию</option>
     </select>
-    <div class="product-list__container">
-      <ProductCard v-for="product in sortedArray" :product="product" :key="product.id" @delete="handleDelete"/>
-    </div>
+      <transition-group name="list" class="product-list__container">
+        <ProductCard  :product="product" :key="product.id" @delete="handleDelete" v-for="product in sortedArray"/>
+      </transition-group>
   </div>
 </template>
 <script>
@@ -78,5 +78,20 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 16px 16px;
+}
+//animations
+.list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to  {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-move {
+  transition: transform 1s;
 }
 </style>
