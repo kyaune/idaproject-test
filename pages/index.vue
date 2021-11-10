@@ -28,5 +28,6 @@ export default {
    flex-direction: row;
    font-family: 'Source Sans Pro', sans-serif;
    padding: 32px;
+   gap: 16px;
  }
 </style>
