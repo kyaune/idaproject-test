@@ -38,13 +38,17 @@ export default {
   },
   data() {
     return {
-      products: [],
       active: false,
       isClicked: false,
       name: null,
       price: null,
       description: null,
       image: null
+    }
+  },
+  computed: {
+    products() {
+      return JSON.parse(localStorage.getItem('products'))
     }
   },
   methods: {
@@ -75,10 +79,10 @@ export default {
         return this.price;
       }
     }
-  },
-  mounted() {
-    this.products = JSON.parse(localStorage.getItem('products'))
   }
+  // mounted() {
+  //   this.products = JSON.parse(localStorage.getItem('products'))
+  // }
 }
 </script>
 
