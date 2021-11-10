@@ -5,7 +5,7 @@
       <form class="container__form" @submit="checkForm">
 <!--         TODO: move inputs into different components-->
         <div class="container__element">
-          <p class="container__description">Наименование товара</p>
+          <p class="container__description required">Наименование товара</p>
           <input type="text" v-model="name" name="name" placeholder="Введите наименование товара" class="container__input" :class="{ 'error': isClicked && !name}">
           <p class="container__error" v-if="isClicked && !name">Поле является обязательным</p>
         </div>
@@ -15,12 +15,12 @@
           <textarea name="description" v-model="description" placeholder="Введите описание товара" class="container__input" id="good-description"></textarea>
         </div>
         <div class="container__element">
-          <p class="container__description">Ссылка на изображение товара</p>
+          <p class="container__description required">Ссылка на изображение товара</p>
           <input type="text" name="image" v-model="image" placeholder="Введите ссылку" class="container__input" :class="{ 'error': isClicked && !image}" >
           <p class="container__error" v-if="isClicked && !image">Поле является обязательным</p>
         </div>
         <div class="container__element">
-          <p class="container__description">Цена товара</p>
+          <p class="container__description required">Цена товара</p>
           <input type="text" name="price" @blur="thousandsSeparator" v-model.number="price" placeholder="Введите цену" class="container__input" :class="{ 'error': isClicked && !price}">
           <p class="container__error" v-if="isClicked && !price">Поле является обязательным</p>
         </div>
@@ -156,11 +156,14 @@ p {
 }
 textarea {
   background-color: $white_1;
-  color: $gray_2;
 }
 input::placeholder {
   color: $gray_2;
   padding-top: 10px;
+}
+.required::after {
+  content: " ●";
+  color: $red;
 }
 
 </style>
